@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tacón de Oro | Boutique de Calzado</title>
+
+  <!-- Tipografías elegantes y legibles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- =================================================================
+       1. BARRA SUPERIOR (ANUNCIO Y ESTADO DE SESIÓN)
+  ================================================================== -->
+  <header class="top-bar">
+    <div class="container top-bar-flex">
+      <div class="top-bar-info">
+        <i class="fa-solid fa-crown gold-text"></i>
+        <span><strong>Tacón de Oro</strong> &mdash; Calzado seleccionado con envío nacional</span>
+      </div>
+
+      <div class="top-bar-session">
+        <span id="textoEstadoSesion" class="session-pill">
+          <i class="fa-regular fa-user"></i> Visitante
+        </span>
+        <button id="btnAbrirAuth" class="btn-top btn-top-gold">
+          <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión / Registrarse
+        </button>
+        <button id="btnCerrarSesion" class="btn-top btn-top-ghost" style="display: none;">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Salir
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =================================================================
+       2. NAVEGACIÓN PRINCIPAL
+  ================================================================== -->
+  <nav class="navbar">
+    <div class="container nav-flex">
+      <!-- Marca -->
+      <a href="#" class="brand" onclick="irAlInicio(); return false;">
+        <div class="brand-emblem">
+          <i class="fa-solid fa-shoe-prints"></i>
+        </div>
+        <div class="brand-copy">
+          <span class="brand-name">TACÓN DE ORO</span>
+          <span class="brand-sub">BOUTIQUE DE CALZADO</span>
+        </div>
+      </a>
+
+      <!-- Buscador -->
+      <div id="navBuscador" class="search-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="inputBuscar" placeholder="Buscar calzado por nombre, estilo o color...">
+      </div>
+
+      <!-- Enlaces -->
+      <ul class="nav-links">
+        <li class="nav-item-tienda"><a href="#inicio" class="nav-link active" onclick="mostrarSeccion('inicio')">Inicio</a></li>
+        <li class="nav-item-tienda"><a href="#ofertas" class="nav-link" onclick="mostrarSeccion('inicio')">Ofertas</a></li>
+        <li class="nav-item-tienda"><a href="#novedades" class="nav-link" onclick="mostrarSeccion('inicio')">Nuevos</a></li>
+        <li class="nav-item-tienda"><a href="#catalogo" class="nav-link" onclick="mostrarSeccion('inicio')">Catálogo</a></li>
+        <!-- Solo visible para clientes con sesión activa -->
+        <li id="navItemPerfil" style="display: none;">
+          <a href="#perfil" class="nav-link" onclick="mostrarSeccion('perfil'); return false;">
+            <i class="fa-solid fa-user"></i> Mi Perfil
+          </a>
+        </li>
+        <!-- Solo visible para los 3 Administradores -->
+        <li id="navItemAdmin" style="display: none;">
+          <a href="#panel-admin" class="nav-link nav-link-admin" onclick="mostrarSeccion('panel-admin'); return false;">
+            <i class="fa-solid fa-shield-halved"></i> Administración
+          </a>
+        </li>
+      </ul>
+
+      <!-- Carrito -->
+      <button id="btnAbrirCarrito" class="btn-cart" aria-label="Abrir carrito">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="cart-label">Carrito</span>
+        <span id="contadorCarrito" class="cart-count">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Notificación flotante -->
+  <div id="notificacion" class="toast-box" role="status" aria-live="polite"></div>
+
+  <!-- =================================================================
+       3. CONTENIDO PRINCIPAL
+  ================================================================== -->
+  <main id="inicio">
+
+    <!-- ================= VISTA PRINCIPAL: TIENDA ================= -->
+    <div id="vistaTienda">
+
+      <!-- HERO EDITORIAL -->
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-text">
+            <span class="eyebrow"><i class="fa-solid fa-sparkles"></i> Nueva Colección 2026</span>
+            <h1>Elegancia y Confort en Cada Paso</h1>
+            <p>
+              Explora nuestras colecciones de temporada, ofertas exclusivas y filtra el calzado por talla, color, estilo y rango de precio.
+            </p>
+            <div class="hero-actions">
+              <a href="#catalogo" class="btn btn-gold">
+                Explorar Catálogo <i class="fa-solid fa-arrow-right"></i>
+              </a>
+              <a href="#ofertas" class="btn btn-outline-light">
+                Ver Ofertas
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-card-visual">
+            <div class="hero-visual-frame">
+              <i class="fa-solid fa-shoe-prints"></i>
+              <span class="frame-title">Colección Tacón de Oro</span>
+              <span class="frame-sub">Dama &bull; Caballero &bull; Infantil</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra de beneficios -->
+        <div class="trust-strip">
+          <div class="container trust-grid">
+            <div class="trust-item">
+              <i class="fa-solid fa-truck-fast"></i>
+              <div>
+                <strong>Envío Seguro</strong>
+                <span>Cobertura nacional rastreable</span>
+              </div>
+            </div>
+            <div class="trust-item">
+              <i class="fa-solid fa-ruler-horizontal"></i>
+              <div>
+                <strong>Todas las Tallas</strong>
+                <span>Desde 17.0 hasta 28.0 MX</span>
+              </div>
+            </div>
+            <div class="trust-item">
+              <i class="fa-solid fa-shield-check"></i>
+              <div>
+                <strong>Acceso Verificado</strong>
+                <span>Cuenta protegida con código de 6 dígitos</span>
+              </div>
+            </div>
+            <div class="trust-item">
+              <i class="fa-solid fa-arrows-rotate"></i>
+              <div>
+                <strong>Cambios Fáciles</strong>
+                <span>Garantía de ajuste en cada par</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AVISOS DE DESCUENTOS POR TEMPORADA (PUBLICADOS POR ADMINISTRADORES) -->
+      <section id="seccionAvisosTemporada" class="seasonal-notices-wrap" style="display: none;">
+        <div class="container">
+          <div id="contenedorAvisosTemporada" class="seasonal-notices-list"></div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: OFERTAS DE TEMPORADA -->
+      <section id="ofertas" class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker accent-red"><i class="fa-solid fa-tag"></i> Promociones</span>
+              <h2>Ofertas de Temporada</h2>
+              <p class="section-sub">Modelos seleccionados con descuento especial.</p>
+            </div>
+            <a href="#catalogo" class="section-link">Ver todo el catálogo <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+
+          <div id="gridOfertas" class="products-grid"></div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: NUEVOS LANZAMIENTOS -->
+      <section id="novedades" class="section section-tinted">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker accent-green"><i class="fa-solid fa-star"></i> Recién Llegados</span>
+              <h2>Nuevos Lanzamientos</h2>
+              <p class="section-sub">Las incorporaciones más recientes a nuestra boutique.</p>
+            </div>
+          </div>
+
+          <div id="gridNovedades" class="products-grid"></div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: CATÁLOGO CON FILTROS POR PREFERENCIA -->
+      <section id="catalogo" class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker"><i class="fa-solid fa-sliders"></i> Catálogo General</span>
+              <h2>Filtra por Tus Preferencias</h2>
+              <p class="section-sub">Encuentra el calzado exacto eligiendo categoría, talla, color, estilo y precio.</p>
+            </div>
+            <button id="btnLimpiarFiltros" class="btn btn-outline">
+              <i class="fa-solid fa-rotate-left"></i> Limpiar Filtros
+            </button>
+          </div>
+
+          <div class="catalog-layout">
+            <!-- Panel de filtros -->
+            <aside class="filters-card">
+              <h3 class="filters-title"><i class="fa-solid fa-filter"></i> Filtros</h3>
+
+              <!-- Categoría -->
+              <div class="filter-group">
+                <label class="filter-label">Categoría</label>
+                <div class="chip-group">
+                  <button class="chip active" onclick="aplicarFiltroCategoria('todas', this)">Todas</button>
+                  <button class="chip" onclick="aplicarFiltroCategoria('Dama', this)">Dama</button>
+                  <button class="chip" onclick="aplicarFiltroCategoria('Caballero', this)">Caballero</button>
+                  <button class="chip" onclick="aplicarFiltroCategoria('Infantil', this)">Infantil</button>
+                </div>
+              </div>
+
+              <!-- Marca -->
+              <div class="filter-group">
+                <label class="filter-label" for="filtroMarca">Marca</label>
+                <select id="filtroMarca" class="form-control">
+                  <option value="todas">Todas las marcas</option>
+                  <option value="Nike">Nike</option>
+                  <option value="Tacón de Oro">Tacón de Oro</option>
+                </select>
+              </div>
+
+              <!-- Estilo / Línea -->
+              <div class="filter-group">
+                <label class="filter-label" for="filtroLinea">Estilo / Línea</label>
+                <select id="filtroLinea" class="form-control">
+                  <option value="todos">Todos los estilos</option>
+                  <option value="Deportivo">Deportivo</option>
+                  <option value="Casual">Casual</option>
+                  <option value="Formal">Formal</option>
+                </select>
+              </div>
+
+              <!-- Talla -->
+              <div class="filter-group">
+                <label class="filter-label">Talla (MX)</label>
+                <div id="contenedorTallas" class="sizes-grid"></div>
+              </div>
+
+              <!-- Color -->
+              <div class="filter-group">
+                <label class="filter-label">Color</label>
+                <div id="contenedorColores" class="colors-wrap"></div>
+              </div>
+
+              <!-- Precio máximo -->
+              <div class="filter-group">
+                <div class="price-row">
+                  <label class="filter-label" for="rangoPrecio">Precio Máximo</label>
+                  <strong id="textoPrecioMaximo" class="price-tag">$5,000</strong>
+                </div>
+                <input type="range" id="rangoPrecio" min="300" max="5000" step="100" value="5000" class="range-input">
+                <div class="range-limits">
+                  <span>$300</span>
+                  <span>$5,000</span>
+                </div>
+              </div>
+            </aside>
+
+            <!-- Resultados -->
+            <div class="catalog-results">
+              <div class="results-bar">
+                <span id="contadorArticulos">Cargando catálogo...</span>
+              </div>
+
+              <div id="gridCatalogo" class="products-grid"></div>
+
+              <div id="sinResultados" class="empty-card" style="display: none;">
+                <i class="fa-solid fa-shoe-prints"></i>
+                <h3>Sin coincidencias</h3>
+                <p>No hay modelos disponibles con la combinación actual de filtros.</p>
+                <button class="btn btn-gold" onclick="limpiarTodosLosFiltros()">Restablecer Filtros</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= VISTA DE PERFIL DE USUARIO ================= -->
+    <section id="vistaPerfil" class="section profile-view" style="display: none;">
+      <div class="container">
+        <div class="admin-banner">
+          <div>
+            <span class="section-kicker"><i class="fa-solid fa-user-check"></i> Mi Cuenta</span>
+            <h2 id="perfilNombreTitulo">Mi Perfil</h2>
+            <p id="perfilSubtitulo" class="section-sub">Gestiona tus pedidos, historial de compras y datos personales.</p>
+          </div>
+          <button class="btn btn-outline-light" onclick="mostrarSeccion('inicio')">
+            <i class="fa-solid fa-store"></i> Volver a la Tienda
+          </button>
+        </div>
+
+        <!-- KPIs del Perfil -->
+        <div class="kpi-grid">
+          <div class="kpi-box">
+            <div class="kpi-icon"><i class="fa-solid fa-clock"></i></div>
+            <div>
+              <span class="kpi-label">Pedidos Activos</span>
+              <strong id="perfilTotalActivos" class="kpi-value">0</strong>
+            </div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-icon"><i class="fa-solid fa-box-open"></i></div>
+            <div>
+              <span class="kpi-label">Compras Anteriores</span>
+              <strong id="perfilTotalEntregadas" class="kpi-value">0</strong>
+            </div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+            <div>
+              <span class="kpi-label">Todas las Compras</span>
+              <strong id="perfilTotalCompras" class="kpi-value">0</strong>
+            </div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-icon"><i class="fa-solid fa-wallet"></i></div>
+            <div>
+              <span class="kpi-label">Total Acumulado</span>
+              <strong id="perfilTotalGastado" class="kpi-value">$0.00</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pestañas del Perfil -->
+        <div class="admin-tabs">
+          <button class="perfil-tab active" onclick="cambiarTabPerfil('tabPerfilPedidos', this)">
+            <i class="fa-solid fa-truck-fast"></i> Pedidos Activos
+          </button>
+          <button class="perfil-tab" onclick="cambiarTabPerfil('tabPerfilAnteriores', this)">
+            <i class="fa-solid fa-circle-check"></i> Compras Anteriores
+          </button>
+          <button class="perfil-tab" onclick="cambiarTabPerfil('tabPerfilTodas', this)">
+            <i class="fa-solid fa-receipt"></i> Todas las Compras
+          </button>
+          <button class="perfil-tab" onclick="cambiarTabPerfil('tabPerfilEditar', this)">
+            <i class="fa-solid fa-user-pen"></i> Editar Información
+          </button>
+          <button class="perfil-tab perfil-tab-danger" onclick="cambiarTabPerfil('tabPerfilEliminar', this)">
+            <i class="fa-solid fa-trash-can"></i> Eliminar Cuenta
+          </button>
+        </div>
+
+        <!-- Mensajes de estado dentro del perfil -->
+        <div id="perfilMensaje" class="auth-alert" style="display: none;"></div>
+
+        <!-- Tab 1: Pedidos Activos (Pendiente / Empaquetando) -->
+        <div id="tabPerfilPedidos" class="perfil-pane active">
+          <div id="listaPerfilPedidos" class="orders-list"></div>
+        </div>
+
+        <!-- Tab 2: Compras Anteriores (Entregado) -->
+        <div id="tabPerfilAnteriores" class="perfil-pane">
+          <div id="listaPerfilAnteriores" class="orders-list"></div>
+        </div>
+
+        <!-- Tab 3: Todas las Compras -->
+        <div id="tabPerfilTodas" class="perfil-pane">
+          <div id="listaPerfilTodas" class="orders-list"></div>
+        </div>
+
+        <!-- Tab 4: Editar Información y Contraseña -->
+        <div id="tabPerfilEditar" class="perfil-pane">
+          <div class="profile-grid-2">
+            <div class="profile-card">
+              <h3><i class="fa-solid fa-id-card gold-text"></i> Datos Personales</h3>
+              <form id="formPerfilInfo" onsubmit="guardarInfoPerfil(event)">
+                <div class="form-group">
+                  <label for="perfilNombre">Nombre completo</label>
+                  <input type="text" id="perfilNombre" class="form-control" minlength="3" required>
+                </div>
+                <div class="form-group">
+                  <label for="perfilCorreo">Correo electrónico</label>
+                  <input type="email" id="perfilCorreo" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="perfilTelefono">Teléfono</label>
+                  <input type="tel" id="perfilTelefono" class="form-control" placeholder="Ej. 4771234567">
+                </div>
+                <button type="submit" class="btn btn-gold full-width">
+                  Guardar Cambios <i class="fa-solid fa-floppy-disk"></i>
+                </button>
+              </form>
+            </div>
+
+            <div class="profile-card">
+              <h3><i class="fa-solid fa-lock gold-text"></i> Cambiar Contraseña</h3>
+              <form id="formPerfilPass" onsubmit="cambiarContrasenaPerfil(event)">
+                <div class="form-group">
+                  <label for="perfilPassActual">Contraseña actual</label>
+                  <input type="password" id="perfilPassActual" class="form-control" placeholder="••••••••" required>
+                </div>
+                <div class="form-group">
+                  <label for="perfilPassNueva">Nueva contraseña segura</label>
+                  <input type="password" id="perfilPassNueva" class="form-control" minlength="8" placeholder="••••••••" required>
+                  <ul id="perfilPasswordChecklist" class="password-checklist">
+                    <li data-rule="length"><i class="fa-regular fa-circle"></i> Mínimo 8 caracteres</li>
+                    <li data-rule="upper"><i class="fa-regular fa-circle"></i> Al menos una letra mayúscula (A-Z)</li>
+                    <li data-rule="number"><i class="fa-regular fa-circle"></i> Al menos un número (0-9)</li>
+                    <li data-rule="symbol"><i class="fa-regular fa-circle"></i> Al menos un símbolo especial (!@#$%&amp;*)</li>
+                  </ul>
+                </div>
+                <button type="submit" class="btn btn-gold full-width">
+                  Actualizar Contraseña <i class="fa-solid fa-key"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 5: Eliminar Cuenta -->
+        <div id="tabPerfilEliminar" class="perfil-pane">
+          <div class="profile-card danger-card">
+            <h3><i class="fa-solid fa-triangle-exclamation"></i> Eliminar Cuenta Permanentemente</h3>
+            <p class="danger-desc">
+              Esta acción eliminará permanentemente tu cuenta, tu carrito y tu historial de pedidos de la base de datos. No se puede deshacer.
+            </p>
+            <form id="formEliminarCuenta" onsubmit="eliminarCuentaUsuario(event)">
+              <div class="form-group">
+                <label for="eliminarPass">Confirma tu contraseña actual</label>
+                <input type="password" id="eliminarPass" class="form-control" placeholder="Ingresa tu contraseña" required>
+              </div>
+              <label class="confirm-check">
+                <input type="checkbox" id="confirmarEliminarCuenta" required>
+                Entiendo que mi cuenta será eliminada de forma definitiva en la base de datos.
+              </label>
+              <button type="submit" class="btn btn-danger full-width">
+                <i class="fa-solid fa-trash-can"></i> Eliminar mi Cuenta Permanentemente
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VISTA EXCLUSIVA: PANEL DE ADMINISTRACIÓN ================= -->
+    <section id="vistaPanelAdmin" class="section admin-view" style="display: none;">
+      <div class="container">
+        <div class="admin-banner">
+          <div>
+            <span class="section-kicker"><i class="fa-solid fa-shield-halved"></i> Vista Exclusiva de Administrador</span>
+            <h2>Panel de Administración y Control</h2>
+            <p id="adminBienvenida" class="section-sub">Gestiona productos, precios, descuentos, visibilidad, avisos de temporada y guías de envío.</p>
+          </div>
+          <button class="btn btn-gold" onclick="abrirModalProductoAdmin()">
+            <i class="fa-solid fa-plus"></i> Nuevo Producto
+          </button>
+        </div>
+
+        <!-- KPIs -->
+        <div class="kpi-grid">
+          <div class="kpi-box">
+            <div class="kpi-icon"><i class="fa-solid fa-shoe-prints"></i></div>
+            <div>
+              <span class="kpi-label">Modelos en Catálogo</span>
+              <strong id="adminTotalArticulos" class="kpi-value">0</strong>
+            </div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+            <div>
+              <span class="kpi-label">Pares en Inventario</span>
+              <strong id="adminTotalPares" class="kpi-value">0</strong>
+            </div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-icon"><i class="fa-solid fa-users"></i></div>
+            <div>
+              <span class="kpi-label">Usuarios Registrados</span>
+              <strong id="adminTotalUsuarios" class="kpi-value">3</strong>
+            </div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-icon"><i class="fa-solid fa-receipt"></i></div>
+            <div>
+              <span class="kpi-label">Pedidos en Sistema</span>
+              <strong id="adminTotalPedidos" class="kpi-value">0</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pestañas del Panel Admin -->
+        <div class="admin-tabs">
+          <button class="admin-tab active" onclick="cambiarTabAdmin('tabInventario', this)">
+            <i class="fa-solid fa-tags"></i> Productos, Precios y Descuentos
+          </button>
+          <button class="admin-tab" onclick="cambiarTabAdmin('tabAvisos', this)">
+            <i class="fa-solid fa-bullhorn"></i> Avisos de Temporada
+          </button>
+          <button class="admin-tab" onclick="cambiarTabAdmin('tabPedidos', this)">
+            <i class="fa-solid fa-truck-fast"></i> Pedidos y Guías de Envío
+          </button>
+          <button class="admin-tab" onclick="cambiarTabAdmin('tabUsuarios', this)">
+            <i class="fa-solid fa-users"></i> Usuarios y Administradores
+          </button>
+        </div>
+
+        <!-- Tab 1: Productos, Precios, Descuentos, Ocultar y Eliminar -->
+        <div id="tabInventario" class="admin-pane active">
+          <!-- Barra rápida de descuentos masivos por temporada -->
+          <div class="admin-promo-bar">
+            <div>
+              <strong><i class="fa-solid fa-percent gold-text"></i> Descuento Masivo por Temporada</strong>
+              <span>Aplica o restablece un porcentaje de descuento a toda una marca o categoría al instante.</span>
+            </div>
+            <form class="admin-promo-controls" onsubmit="aplicarDescuentoMasivoAdmin(event)">
+              <select id="adminMasivoObjetivo" class="form-control">
+                <option value="todos">Todo el catálogo</option>
+                <option value="Nike">Marca: Nike</option>
+                <option value="Tacón de Oro">Marca: Tacón de Oro</option>
+                <option value="Caballero">Categoría: Caballero</option>
+                <option value="Dama">Categoría: Dama</option>
+                <option value="Infantil">Categoría: Infantil</option>
+              </select>
+              <input type="number" id="adminMasivoPct" class="form-control" min="0" max="90" value="15" placeholder="% Desc." required style="width:110px;">
+              <button type="submit" class="btn btn-gold">Aplicar %</button>
+              <button type="button" class="btn btn-outline" onclick="quitarDescuentoMasivoAdmin()">Quitar Descuentos</button>
+            </form>
+          </div>
+
+          <div class="table-card">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Modelo / Marca</th>
+                  <th>Tallas y Colores</th>
+                  <th>Precio Base ($)</th>
+                  <th>Desc. (%)</th>
+                  <th>Precio Final</th>
+                  <th>Stock</th>
+                  <th>Visibilidad</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaAdminArticulos"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab 2: Avisos de Descuentos por Temporada -->
+        <div id="tabAvisos" class="admin-pane">
+          <div class="profile-grid-2">
+            <div class="profile-card">
+              <h3><i class="fa-solid fa-bullhorn gold-text"></i> Publicar Aviso de Temporada</h3>
+              <form id="formAdminAviso" onsubmit="crearAvisoTemporadaAdmin(event)">
+                <div class="form-group">
+                  <label for="avisoTitulo">Título del aviso</label>
+                  <input type="text" id="avisoTitulo" class="form-control" placeholder="Ej. Gran Venta de Verano Nike" required>
+                </div>
+                <div class="form-group">
+                  <label for="avisoEtiqueta">Etiqueta destacada (opcional)</label>
+                  <input type="text" id="avisoEtiqueta" class="form-control" placeholder="Ej. Hasta 30% OFF">
+                </div>
+                <div class="form-group">
+                  <label for="avisoMensaje">Mensaje para los clientes</label>
+                  <input type="text" id="avisoMensaje" class="form-control" placeholder="Ej. Descuentos especiales en toda la línea deportiva esta semana." required>
+                </div>
+                <button type="submit" class="btn btn-gold full-width">
+                  Publicar Aviso en la Tienda <i class="fa-solid fa-paper-plane"></i>
+                </button>
+              </form>
+            </div>
+
+            <div class="profile-card">
+              <h3><i class="fa-solid fa-list-check gold-text"></i> Avisos Registrados</h3>
+              <div id="listaAdminAvisos" class="orders-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Pedidos y Guías de Envío -->
+        <div id="tabPedidos" class="admin-pane">
+          <div class="table-card">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th># Pedido</th>
+                  <th>Cliente y Artículos</th>
+                  <th>Total</th>
+                  <th>Estado del Pedido</th>
+                  <th>Paquetería</th>
+                  <th>Número de Guía</th>
+                  <th>Guardar</th>
+                </tr>
+              </thead>
+              <tbody id="tablaAdminPedidos"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab 4: Usuarios y Administradores -->
+        <div id="tabUsuarios" class="admin-pane">
+          <div class="admin-promo-bar">
+            <div>
+              <strong><i class="fa-solid fa-user-shield gold-text"></i> Gestión de Usuarios y Administradores</strong>
+              <span>Da de alta nuevos administradores o clientes, edita su información o elimina cuentas en la base de datos.</span>
+            </div>
+            <button type="button" class="btn btn-gold" onclick="abrirModalUsuarioAdmin()">
+              <i class="fa-solid fa-user-plus"></i> Dar de Alta Usuario / Administrador
+            </button>
+          </div>
+
+          <div class="table-card">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Correo</th>
+                  <th>Rol</th>
+                  <th>Teléfono</th>
+                  <th>Registro</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaAdminUsuarios"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =================================================================
+       4. PIE DE PÁGINA
+  ================================================================== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand-copy">
+          <span class="brand-name footer-brand">TACÓN DE ORO</span>
+          <span class="brand-sub">BOUTIQUE DE CALZADO</span>
+        </div>
+        <p class="footer-desc">
+          Tienda en línea de calzado para dama, caballero e infantil con autenticación verificada por correo.
+        </p>
+      </div>
+      <div>
+        <h4>Secciones</h4>
+        <ul class="footer-links">
+          <li><a href="#ofertas">Ofertas de Temporada</a></li>
+          <li><a href="#novedades">Nuevos Lanzamientos</a></li>
+          <li><a href="#catalogo">Catálogo por Preferencias</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Administración</h4>
+        <ul class="footer-links">
+          <li>Andrés Antonio Flores</li>
+          <li>Ethan Armando Mata Cerón</li>
+          <li>Enrique Soto Andrade</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Tacón de Oro &mdash; Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =================================================================
+       5. MODAL: LOGIN Y REGISTRO CON CÓDIGO DE VERIFICACIÓN (2 PASOS)
+  ================================================================== -->
+  <div id="modalAuth" class="modal-backdrop">
+    <div class="modal-card auth-modal">
+      <button class="modal-close" onclick="cerrarModalAuth()" aria-label="Cerrar">&times;</button>
+
+      <!-- Pestañas Login / Registro -->
+      <div class="auth-tabs">
+        <button id="tabBtnLogin" class="auth-tab active" onclick="cambiarTabAuth('login')">Iniciar Sesión</button>
+        <button id="tabBtnRegistro" class="auth-tab" onclick="cambiarTabAuth('registro')">Crear Cuenta</button>
+      </div>
+
+      <!-- Mensaje de error / estado dentro del modal -->
+      <div id="authMensaje" class="auth-alert" style="display: none;"></div>
+
+      <!-- ========== FLUJO DE LOGIN ========== -->
+      <div id="panelLogin">
+        <!-- Paso 1: Correo y contraseña -->
+        <form id="formLoginPaso1" onsubmit="solicitarCodigoLogin(event)">
+          <p class="auth-intro">Ingresa tu correo y contraseña. Te enviaremos un código de verificación de 6 dígitos.</p>
+          <div class="form-group">
+            <label for="loginCorreo">Correo electrónico</label>
+            <input type="email" id="loginCorreo" class="form-control" placeholder="correo@ejemplo.com" required>
+          </div>
+          <div class="form-group">
+            <label for="loginContrasena">Contraseña</label>
+            <input type="password" id="loginContrasena" class="form-control" placeholder="••••••••" required>
+          </div>
+          <button type="submit" id="btnLoginPaso1" class="btn btn-gold full-width">
+            Enviar Código de Verificación <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+
+        <!-- Paso 2: Ingresar código de 6 dígitos -->
+        <form id="formLoginPaso2" onsubmit="verificarCodigoLogin(event)" style="display: none;">
+          <p class="auth-intro">
+            Ingresa el código de 6 dígitos enviado a <strong id="loginCorreoDestino"></strong>.
+          </p>
+          <div class="form-group">
+            <label for="loginCodigo">Código de Verificación</label>
+            <input type="text" id="loginCodigo" class="form-control otp-input" inputmode="numeric" maxlength="6" pattern="\d{6}" placeholder="000000" required>
+          </div>
+          <button type="submit" class="btn btn-gold full-width">
+            Verificar e Iniciar Sesión <i class="fa-solid fa-check"></i>
+          </button>
+          <button type="button" class="btn btn-text full-width" onclick="volverPaso1Login()">
+            &larr; Cambiar correo o contraseña
+          </button>
+        </form>
+      </div>
+
+      <!-- ========== FLUJO DE REGISTRO ========== -->
+      <div id="panelRegistro" style="display: none;">
+        <!-- Paso 1: Datos del nuevo cliente -->
+        <form id="formRegistroPaso1" onsubmit="solicitarCodigoRegistro(event)">
+          <p class="auth-intro">Crea tu cuenta de cliente. Verificaremos tu correo con un código de 6 dígitos.</p>
+          <div class="form-group">
+            <label for="regNombre">Nombre completo</label>
+            <input type="text" id="regNombre" class="form-control" placeholder="Ej. María López" required>
+          </div>
+          <div class="form-group">
+            <label for="regCorreo">Correo electrónico</label>
+            <input type="email" id="regCorreo" class="form-control" placeholder="correo@ejemplo.com" required>
+          </div>
+          <div class="form-group">
+            <label for="regTelefono">Teléfono (opcional)</label>
+            <input type="tel" id="regTelefono" class="form-control" placeholder="Ej. 4771234567">
+          </div>
+          <div class="form-group">
+            <label for="regContrasena">Contraseña segura</label>
+            <input type="password" id="regContrasena" class="form-control" minlength="8" placeholder="••••••••" required>
+            <ul id="regPasswordChecklist" class="password-checklist">
+              <li data-rule="length"><i class="fa-regular fa-circle"></i> Mínimo 8 caracteres</li>
+              <li data-rule="upper"><i class="fa-regular fa-circle"></i> Al menos una letra mayúscula (A-Z)</li>
+              <li data-rule="number"><i class="fa-regular fa-circle"></i> Al menos un número (0-9)</li>
+              <li data-rule="symbol"><i class="fa-regular fa-circle"></i> Al menos un símbolo especial (!@#$%&amp;*)</li>
+            </ul>
+          </div>
+          <button type="submit" id="btnRegistroPaso1" class="btn btn-gold full-width">
+            Enviar Código de Verificación <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+
+        <!-- Paso 2: Confirmar código y registrar -->
+        <form id="formRegistroPaso2" onsubmit="verificarCodigoRegistro(event)" style="display: none;">
+          <p class="auth-intro">
+            Ingresa el código de 6 dígitos enviado a <strong id="regCorreoDestino"></strong> para activar tu cuenta.
+          </p>
+          <div class="form-group">
+            <label for="regCodigo">Código de Verificación</label>
+            <input type="text" id="regCodigo" class="form-control otp-input" inputmode="numeric" maxlength="6" pattern="\d{6}" placeholder="000000" required>
+          </div>
+          <button type="submit" class="btn btn-gold full-width">
+            Confirmar Código y Crear Cuenta <i class="fa-solid fa-user-check"></i>
+          </button>
+          <button type="button" class="btn btn-text full-width" onclick="volverPaso1Registro()">
+            &larr; Editar datos de registro
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================================================
+       6. MODAL: DETALLE DE ARTÍCULO (SIN FOTOS, CAMPOS PREPARADOS)
+  ================================================================== -->
+  <div id="modalArticulo" class="modal-backdrop">
+    <div class="modal-card modal-wide">
+      <button class="modal-close" onclick="cerrarModalArticulo()" aria-label="Cerrar">&times;</button>
+      <div id="contenidoModalArticulo"></div>
+    </div>
+  </div>
+
+  <!-- =================================================================
+       7. PANEL LATERAL: CARRITO DE COMPRAS
+  ================================================================== -->
+  <div id="panelCarrito" class="drawer-backdrop">
+    <div class="drawer-panel">
+      <div class="drawer-head">
+        <h3><i class="fa-solid fa-bag-shopping gold-text"></i> Tu Carrito</h3>
+        <button class="modal-close-inline" onclick="cerrarCarrito()" aria-label="Cerrar">&times;</button>
+      </div>
+
+      <div id="listaCarrito" class="drawer-body"></div>
+
+      <div class="drawer-foot">
+        <div class="summary-line">
+          <span>Subtotal</span>
+          <span id="subtotalCarrito">$0.00</span>
+        </div>
+        <div class="summary-line">
+          <span>Envío estándar</span>
+          <span id="envioCarrito">$150.00</span>
+        </div>
+        <div class="summary-line total">
+          <span>Total</span>
+          <strong id="totalCarrito">$0.00</strong>
+        </div>
+        <button class="btn btn-gold full-width" onclick="finalizarCompra()">
+          Finalizar Compra <i class="fa-solid fa-credit-card"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================================================
+       8. MODAL ADMIN: CREAR / EDITAR PRODUCTO COMPLETO
+  ================================================================== -->
+  <div id="modalAdminProducto" class="modal-backdrop">
+    <div class="modal-card modal-wide">
+      <button class="modal-close" onclick="cerrarModalProductoAdmin()" aria-label="Cerrar">&times;</button>
+      <h3 id="tituloModalProductoAdmin" style="margin-bottom:14px;">Editar Producto</h3>
+      <form id="formAdminProducto" onsubmit="guardarProductoModalAdmin(event)">
+        <input type="hidden" id="adminProdId" value="0">
+        <div class="admin-form-grid">
+          <div class="form-group">
+            <label for="adminProdNombre">Modelo / Nombre</label>
+            <input type="text" id="adminProdNombre" class="form-control" placeholder="Ej. Nike Air Max Excee" required>
+          </div>
+          <div class="form-group">
+            <label for="adminProdMarca">Marca</label>
+            <input type="text" id="adminProdMarca" class="form-control" value="Nike" required>
+          </div>
+          <div class="form-group">
+            <label for="adminProdCategoria">Categoría</label>
+            <select id="adminProdCategoria" class="form-control">
+              <option value="Caballero">Caballero</option>
+              <option value="Dama">Dama</option>
+              <option value="Infantil">Infantil</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="adminProdLinea">Estilo / Línea</label>
+            <select id="adminProdLinea" class="form-control">
+              <option value="Deportivo">Deportivo</option>
+              <option value="Casual">Casual</option>
+              <option value="Formal">Formal</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="adminProdPrecio">Precio Base ($ MXN)</label>
+            <input type="number" id="adminProdPrecio" class="form-control" step="0.01" min="1" required>
+          </div>
+          <div class="form-group">
+            <label for="adminProdDescuento">Descuento (%)</label>
+            <input type="number" id="adminProdDescuento" class="form-control" min="0" max="90" value="0" required>
+          </div>
+          <div class="form-group">
+            <label for="adminProdStock">Stock Disponible (pares)</label>
+            <input type="number" id="adminProdStock" class="form-control" min="0" value="10" required>
+          </div>
+          <div class="form-group">
+            <label for="adminProdTallas">Tallas MX (separadas por coma)</label>
+            <input type="text" id="adminProdTallas" class="form-control" placeholder="25.0, 25.5, 26.0, 27.0" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="adminProdColores">Colores (separados por coma)</label>
+          <input type="text" id="adminProdColores" class="form-control" placeholder="Blanco, Negro, Rojo, Azul" required>
+        </div>
+        <div class="form-group">
+          <label for="adminProdDescripcion">Descripción</label>
+          <input type="text" id="adminProdDescripcion" class="form-control" placeholder="Descripción breve del modelo">
+        </div>
+        <div class="admin-checks-row">
+          <label class="confirm-check">
+            <input type="checkbox" id="adminProdNuevo"> Marcar como Nuevo Lanzamiento
+          </label>
+          <label class="confirm-check">
+            <input type="checkbox" id="adminProdVisible" checked> Visible en la tienda
+          </label>
+        </div>
+        <button type="submit" class="btn btn-gold full-width">
+          Guardar Producto <i class="fa-solid fa-check"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- =================================================================
+       9. MODAL ADMIN: DAR DE ALTA / EDITAR USUARIOS Y ADMINISTRADORES
+  ================================================================== -->
+  <div id="modalAdminUsuario" class="modal-backdrop">
+    <div class="modal-card modal-wide">
+      <button class="modal-close" onclick="cerrarModalUsuarioAdmin()" aria-label="Cerrar">&times;</button>
+      <h3 id="tituloModalUsuarioAdmin" style="margin-bottom:14px;">Dar de Alta Usuario / Administrador</h3>
+      <form id="formAdminUsuario" onsubmit="guardarUsuarioModalAdmin(event)">
+        <input type="hidden" id="adminUserId" value="0">
+        <div class="admin-form-grid">
+          <div class="form-group">
+            <label for="adminUserNombre">Nombre completo</label>
+            <input type="text" id="adminUserNombre" class="form-control" minlength="3" placeholder="Ej. Ana Martínez" required>
+          </div>
+          <div class="form-group">
+            <label for="adminUserCorreo">Correo electrónico real</label>
+            <input type="email" id="adminUserCorreo" class="form-control" placeholder="correo@gmail.com" required>
+          </div>
+          <div class="form-group">
+            <label for="adminUserTelefono">Teléfono</label>
+            <input type="tel" id="adminUserTelefono" class="form-control" placeholder="Ej. 4771234567">
+          </div>
+          <div class="form-group">
+            <label for="adminUserRol">Rol en el sistema</label>
+            <select id="adminUserRol" class="form-control">
+              <option value="Administrador">Administrador</option>
+              <option value="Cliente">Cliente</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label id="labelAdminUserPass" for="adminUserPass">Contraseña segura</label>
+          <input type="password" id="adminUserPass" class="form-control" placeholder="••••••••">
+          <ul id="adminUserPasswordChecklist" class="password-checklist">
+            <li data-rule="length"><i class="fa-regular fa-circle"></i> Mínimo 8 caracteres</li>
+            <li data-rule="upper"><i class="fa-regular fa-circle"></i> Al menos una letra mayúscula (A-Z)</li>
+            <li data-rule="number"><i class="fa-regular fa-circle"></i> Al menos un número (0-9)</li>
+            <li data-rule="symbol"><i class="fa-regular fa-circle"></i> Al menos un símbolo especial (!@#$%&amp;*)</li>
+          </ul>
+        </div>
+        <button type="submit" class="btn btn-gold full-width">
+          Guardar Usuario <i class="fa-solid fa-floppy-disk"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

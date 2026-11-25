@@ -1,0 +1,6 @@
+# Credenciales locales sensibles
+php/config_correo.local.php
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
